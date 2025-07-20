@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackTrace - Terminal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 1rem;
+    }
+    #terminal {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      background: #111;
+      padding: 1rem;
+      border: 1px solid #00ff00;
+    }
+    input {
+      background: #000;
+      color: #00ff00;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal">
+    <pre id="output">HackTrace v1.0\nDigite um comando:</pre>
+    <input type="text" id="input" placeholder="ex: scan 192.168.0.7">
+  </div>
+
+  <script>
+    const comandos = {
+      scan: ip => `Iniciando varredura em ${ip}...\nPortas abertas: 22 (SSH), 80 (HTTP)`,
+      trace: destino => `Rastreando rota para ${destino}...\nHop 1 -> 192.168.0.1\nHop 2 -> ${destino}`,
+      inject: payload => `Payload '${payload}' injetado com sucesso. Monitorando resposta...`,
+      help: () => `Comandos disponíveis:\nscan [ip]\ntrace [destino]\ninject [payload]\nhelp`
+    };
+
+    function interpretar(input) {
+      const [cmd, ...args] = input.trim().split(' ');
+      if (comandos[cmd]) {
+        return comandos[cmd](args.join(' '));
+      }
+      return 'Comando não reconhecido. Digite help para ajuda.';
+    }
+
+    const inputEl = document.getElementById('input');
+    const outputEl = document.getElementById('output');
+
+    inputEl.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        const entrada = inputEl.value;
+        const resposta = interpretar(entrada);
+        outputEl.textContent += `\n> ${entrada}\n${resposta}`;
+        inputEl.value = '';
+      }
+    });
+  </script>
+</body>
+</html>

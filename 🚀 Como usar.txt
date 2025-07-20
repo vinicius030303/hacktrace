@@ -1,0 +1,45 @@
+## 🚀 Como usar
+
+### 🖥️ Frontend (terminal web)
+
+1. Clone ou baixe este repositório  
+2. Abra o arquivo `index.html` em qualquer navegador moderno  
+3. Digite comandos no terminal como:
+
+scan 192.168.0.7
+inject payload_X
+trace route-33
+help
+
+
+O sistema irá simular respostas como portas abertas, rotas e status de injeção.
+
+---
+
+### 🧠 Backend simbólico (Python)
+
+1. Abra o terminal na pasta do projeto  
+2. Execute:
+```bash
+python log_parser.py
+
+
+Quando solicitado, cole uma das mensagens geradas no terminal web, por exemplo:
+
+vbnet
+Copiar
+Editar
+Payload 'payload_X' injetado com sucesso. Monitorando resposta...
+O script Python responderá:
+
+makefile
+Copiar
+Editar
+STATUS: EM ANÁLISE – Payload detectado.
+
+| Comando            | Resultado simulado                      |
+| ------------------ | --------------------------------------- |
+| `scan [ip]`        | Exibe portas abertas de IP fictício     |
+| `trace [destino]`  | Simula rota com hops de rede            |
+| `inject [payload]` | Simula injeção e envia ao parser Python |
+| `help`             | Mostra todos os comandos disponíveis    |
